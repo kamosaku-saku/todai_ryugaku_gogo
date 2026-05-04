@@ -1,0 +1,7 @@
+References and acknowledgements
+
+All images used in this website, including logos, event photos, social media screenshots, QR codes, and hero images, were provided by Todai Study Abroad GoGo. These images are used with permission for the purpose of this DECO1400 Website Implementation project.
+
+This website also uses Google Fonts. Specifically, the Raleway font was imported from Google Fonts and used for the hero heading on the homepage.
+
+Google Fonts. (n.d.). Raleway. https://fonts.google.com/specimen/Raleway

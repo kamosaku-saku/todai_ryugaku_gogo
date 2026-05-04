@@ -1,0 +1,914 @@
+/* =========================================================
+   Base styles
+   ========================================================= */
+
+/* 
+  CSS variables are used to keep colours and spacing consistent.
+  This also makes it easier to update the whole design later.
+*/
+:root {
+	--color-primary: #1689e8;
+	--color-primary-dark: #0f6fbd;
+	--color-light-blue: #e8f9fd;
+	--color-light-grey: #f2f2f2;
+	--color-border: #cfcfcf;
+	--color-text: #222222;
+	--color-muted: #555555;
+	--color-white: #ffffff;
+
+	--font-main: Georgia, "Times New Roman", serif;
+	--font-body: Arial, Helvetica, sans-serif;
+
+	--spacing-small: 0.75rem;
+	--spacing-medium: 1.5rem;
+	--spacing-large: 3rem;
+
+	--max-width: 1000px;
+}
+
+/* 
+  border-box makes layout easier because padding and border
+  are included in the element's total width.
+*/
+* {
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	margin: 0;
+	color: var(--color-text);
+	background-color: var(--color-white);
+	font-family: var(--font-body);
+	line-height: 1.8;
+}
+
+img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+
+a {
+	color: var(--color-primary);
+	text-decoration: none;
+}
+
+a:hover,
+a:focus {
+	color: var(--color-primary-dark);
+	text-decoration: underline;
+}
+
+h1,
+h2,
+h3,
+h4 {
+	font-family: var(--font-main);
+	line-height: 1.2;
+	margin-top: 0;
+}
+
+h1 {
+	font-size: clamp(2rem, 5vw, 3.5rem);
+}
+
+h2 {
+	font-size: clamp(1.6rem, 3vw, 2.2rem);
+	border-bottom: 1px solid var(--color-border);
+	padding-bottom: 0.25rem;
+}
+
+h3 {
+	font-size: 1.4rem;
+}
+
+h4 {
+	font-size: 1.2rem;
+}
+
+p {
+	margin-top: 0;
+}
+
+ul,
+ol {
+	padding-left: 1.4rem;
+}
+
+/* =========================================================
+   Header and navigation
+   ========================================================= */
+
+.site-header {
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--spacing-medium);
+	padding: 0.5rem 2rem;
+	background-color: var(--color-white);
+	border-bottom: 1px solid #eeeeee;
+}
+
+.site-branding {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+}
+
+.site-branding img {
+	width: 90px;
+	height: auto;
+	object-fit: contain;
+}
+
+.site-branding p {
+	margin: 0;
+	font-family: var(--font-main);
+	font-size: 1.2rem;
+	font-weight: bold;
+}
+
+.primary-navigation {
+	display: flex;
+	align-items: center;
+}
+
+.nav-list {
+	display: flex;
+	align-items: center;
+	gap: 2rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.nav-list a {
+	color: var(--color-text);
+	font-size: 0.95rem;
+	font-weight: 600;
+}
+
+.nav-list a:hover,
+.nav-list a:focus {
+	color: var(--color-primary);
+	text-decoration: none;
+}
+
+.nav-list a[aria-current="page"] {
+	color: var(--color-primary);
+	border-bottom: 2px solid var(--color-primary);
+	padding-bottom: 0.25rem;
+}
+
+/* 
+  The button is visible on small screens.
+  JavaScript will later use this class for mobile navigation.
+*/
+.menu-toggle {
+	display: none;
+	padding: 0.5rem 0.8rem;
+	border: 1px solid var(--color-border);
+	border-radius: 0.4rem;
+	background-color: var(--color-white);
+	color: var(--color-text);
+	font: inherit;
+	cursor: pointer;
+}
+
+.menu-toggle:hover,
+.menu-toggle:focus {
+	background-color: var(--color-light-grey);
+}
+
+/* =========================================================
+   Hero sections
+   ========================================================= */
+
+.page-home .hero-content h1 {
+  font-family: "Raleway", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 450px;
+  overflow: hidden;
+}
+
+/* 
+  A light overlay improves text readability on background images.
+*/
+.hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.hero-content {
+  position: absolute;
+  top: 35%;
+  left: 5%;
+  transform: translateY(-50%);
+  color: black;
+  text-align: left;
+  max-width: 900px;
+  z-index: 2;
+}
+
+.hero-about-content,
+.hero-events-content,
+.hero-sns-content {
+  position: absolute;
+  top: 40%;
+  left: 10%;
+  transform: translateY(-50%);
+  color: black;
+  text-align: left;
+  max-width: 1000px;
+  z-index: 2;
+}
+
+.hero-about::after,
+.hero-events::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(255, 255, 255, 0.4);
+  z-index: 1;
+}
+
+.hero-sns::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(255, 255, 255, 0.6);
+  z-index: 1;
+}
+
+.sp-only {
+  display: none;
+}
+
+/* =========================================================
+   General page sections
+   ========================================================= */
+
+.content-section {
+	width: min(100% - 2rem, var(--max-width));
+	margin: 0 auto;
+	padding: var(--spacing-large) 0;
+}
+
+.content-section + .content-section {
+	border-top: 1px solid #eeeeee;
+}
+
+.about-summary,
+.sns-introduction {
+	display: grid;
+	grid-template-columns: 1.5fr 1fr;
+	align-items: center;
+	gap: var(--spacing-large);
+}
+
+.section-image {
+	margin: 0;
+}
+
+.section-image img {
+	margin-inline: auto;
+	max-height: 300px;
+	object-fit: contain;
+}
+
+.study-abroad-overview,
+.event-highlights,
+.sns-platforms {
+	background-color: var(--color-light-grey);
+	width: 100%;
+	max-width: none;
+	padding-inline: max(1rem, calc((100% - var(--max-width)) / 2));
+}
+
+.note {
+	padding: 1rem;
+	background-color: #fff8d8;
+	border-left: 5px solid #f5d742;
+	font-weight: bold;
+}
+
+/* =========================================================
+   Buttons and links
+   ========================================================= */
+
+.button-link {
+	display: inline-block;
+	padding: 0.65rem 4rem;
+    position: relative;
+	border-radius: 0.35rem;
+	background-color: var(--color-primary);
+	color: var(--color-white);
+	font-weight: bold;
+	text-align: center;
+	text-decoration: none;
+	transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.button-link:hover,
+.button-link:focus {
+	background-color: var(--color-primary-dark);
+	color: var(--color-white);
+	text-decoration: none;
+	transform: translateY(-2px);
+}
+
+.button-link::after {
+  content: "▶";
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.back-button {
+	display: inline-block;
+	padding: 0.65rem 3rem;
+    position: relative;
+	border-radius: 0.35rem;
+	background-color: var(--color-primary);
+	color: var(--color-white);
+	font-weight: bold;
+	text-align: center;
+	text-decoration: none;
+	transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.back-button:hover,
+.back-button:focus {
+	background-color: var(--color-primary-dark);
+	color: var(--color-white);
+	text-decoration: none;
+	transform: translateY(-2px);
+}
+
+.back-button::before {
+  content: "◀";
+  position: absolute;
+  left: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.9rem;
+}
+
+/* =========================================================
+   Home page service cards
+   ========================================================= */
+
+.card-grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: var(--spacing-medium);
+	margin-top: var(--spacing-medium);
+}
+
+.service-card {
+	padding: var(--spacing-medium);
+	background-color: var(--color-light-blue);
+	text-align: center;
+}
+
+.service-card img {
+	width: 100%;
+	aspect-ratio: 5 / 4;
+	object-fit: cover;
+	margin-bottom: var(--spacing-medium);
+}
+
+.service-card h3 {
+	margin-bottom: 0.5rem;
+	font-size: 1.8rem;
+}
+
+.service-card p {
+	max-width: 320px;
+	margin-inline: auto;
+}
+
+/* =========================================================
+   About USTEP page
+   ========================================================= */
+
+.process-item {
+	margin: 1.5rem 0;
+	padding-left: 1rem;
+	border-left: 4px solid var(--color-primary);
+}
+
+.process-item h3 {
+	margin-bottom: 0.3rem;
+}
+
+/* =========================================================
+   Events page
+   ========================================================= */
+
+.events-introduction ul {
+	margin-bottom: 0;
+}
+
+.event-month {
+	margin-top: 2rem;
+}
+
+.event-month > h3 {
+	border-bottom: 1px solid var(--color-border);
+	padding-bottom: 0.25rem;
+}
+
+.event-card {
+	margin: 1.25rem 0 2rem;
+	padding: 1.5rem;
+	background-color: var(--color-white);
+}
+
+.event-card h4 {
+	display: inline;
+	background-color: #eeff52;
+	padding: 0.1rem 0.4rem;
+}
+
+.event-type {
+	margin-bottom: 0.4rem;
+	color: var(--color-primary);
+	font-size: 0.9rem;
+	font-weight: bold;
+	text-transform: lowercase;
+}
+
+.event-images {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 1rem;
+	margin-top: 1rem;
+}
+
+.event-card img {
+	max-height: 260px;
+	width: 100%;
+	object-fit: cover;
+	margin-top: 1rem;
+}
+
+.event-card img.event-image-vertical {
+  width: min(100%, 400px);
+  aspect-ratio: 5 / 3;
+  height: auto;
+  max-height: none;
+  object-fit: cover;
+  margin: 1rem auto 0;
+}
+
+/* =========================================================
+   SNS page
+   ========================================================= */
+
+.sns-card {
+	display: grid;
+	grid-template-columns: 1.5fr 1fr;
+	align-items: center;
+	gap: var(--spacing-medium);
+	margin: 2rem 0;
+	padding: 1.5rem;
+	background-color: var(--color-white);
+	border: 1px solid var(--color-border);
+	border-radius: 1.2rem;
+}
+
+.sns-card h3 {
+	border-bottom: 1px solid var(--color-border);
+	padding-bottom: 0.3rem;
+}
+
+.sns-card-image {
+	margin: 0;
+}
+
+.sns-card-image img {
+	width: 100%;
+	max-height: 220px;
+	object-fit: contain;
+}
+
+.sns-images {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.sns-images img {
+  width: auto;
+  height: 180px;
+  max-width: 220px;
+  object-fit: contain;
+}
+
+
+/* =========================================================
+   Footer
+   ========================================================= */
+
+.site-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 2rem 6rem;
+  background-color: var(--color-light-blue);
+}
+
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.footer-branding {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+}
+
+.footer-branding img {
+	width: 90px;
+	height: 90px;
+	object-fit: contain;
+    mix-blend-mode: multiply;
+}
+
+.footer-branding p {
+	margin: 0;
+	font-family: var(--font-main);
+	font-size: 1.2rem;
+	font-weight: bold;
+}
+
+.footer-email {
+  font-size: 0.9rem;
+  color: var(--color-text);
+  margin: 0.5rem 0 0;
+}
+
+.footer-navigation {
+  text-align: right;
+}
+
+.footer-navigation ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.footer-navigation li + li {
+	margin-top: 0.4rem;
+}
+
+.footer-navigation a {
+	color: var(--color-text);
+	font-size: 0.9rem;
+}
+
+/* =========================================================
+   Accessibility and focus states
+   ========================================================= */
+
+:focus-visible {
+	outline: 3px solid var(--color-primary);
+	outline-offset: 3px;
+}
+
+/* =========================================================
+   Responsive styles
+   ========================================================= */
+
+@media screen and (max-width: 800px) {
+	.site-header {
+		align-items: flex-start;
+		padding: 0.75rem 1rem;
+	}
+
+	.site-branding img {
+		width: 52px;
+		height: 52px;
+	}
+
+	.site-branding p {
+		font-size: 1rem;
+	}
+
+	.primary-navigation {
+		flex-direction: column;
+		align-items: flex-end;
+	}
+
+	.menu-toggle {
+		display: inline-block;
+	}
+
+	.nav-list {
+		display: none;
+		width: 100%;
+		margin-top: 0.75rem;
+		flex-direction: column;
+		align-items: flex-end;
+		gap: 0.75rem;
+	}
+
+	/* 
+	  JavaScript can add the class .is-open to show the mobile menu.
+	*/
+	.nav-list.is-open {
+		display: flex;
+	}
+
+	.hero {
+		height: 250px;
+	}
+
+    .hero-content {
+        left: 1rem;
+        right: 1rem;
+        max-width: none;
+    }    
+
+	.about-summary,
+	.sns-introduction,
+	.sns-card {
+		grid-template-columns: 1fr;
+	}
+
+	.section-image {
+		order: -1;
+	}
+
+	.card-grid,
+	.event-images {
+		grid-template-columns: 1fr;
+	}
+
+	.service-card img {
+		height: auto;
+	}
+
+    .site-footer {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .footer-left {
+        align-items: center;
+    }
+
+    .footer-branding {
+        justify-content: center;
+    }
+    
+    .footer-navigation {
+        width: 100%;
+        text-align: center;
+    }
+
+    .footer-navigation ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem;
+        margin: 0;
+        padding: 0;
+    }
+
+    .footer-navigation li {
+        margin: 0;
+    }
+    
+    .footer-navigation li + li {
+        margin-top: 0;
+    }
+      
+    .sns-images {
+        flex-direction: row;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+    
+    .sns-images img {
+        height: 140px;
+        max-width: 180px;
+    }
+    
+    .sns-images img:first-child {
+        height: 120px;
+    }
+}
+
+
+@media screen and (max-width: 500px) {
+	body {
+		font-size: 0.95rem;
+	}
+
+	.site-header {
+		flex-direction: row;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: 1rem;
+	}
+
+	.site-branding {
+		flex: 1;
+	}
+
+	.primary-navigation {
+		width: auto;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+		gap: 0.6rem;
+	}
+
+	.language-switcher {
+		order: 1;
+		margin: 0;
+	}
+
+	.menu-toggle {
+		order: 2;
+		align-self: flex-end;
+	}
+
+	.nav-list {
+		order: 3;
+		align-items: flex-end;
+	}
+
+	.nav-list a {
+		display: block;
+		padding: 0.5rem 0;
+	}
+
+	.hero {
+		min-height: 200px;
+	}
+
+	.content-section {
+		padding: 2rem 0;
+	}
+
+	.study-abroad-overview,
+	.event-highlights,
+	.sns-platforms {
+		padding-inline: 1rem;
+	}
+
+	.service-card,
+	.event-card,
+	.sns-card {
+		padding: 1rem;
+	}
+
+	.button-link {
+		width: 100%;
+	}
+
+	.footer-branding {
+		align-items: flex-start;
+	}
+
+	.sp-only {
+		display: inline;
+	}
+}
+
+/* =========================================================
+   JavaScript interaction styles
+   ========================================================= */
+
+.event-filter {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem;
+	margin: 1.5rem 0;
+}
+
+.event-filter button,
+.accordion-button {
+	padding: 0.55rem 1rem;
+	border: 1px solid var(--color-primary);
+	border-radius: 0.35rem;
+	background-color: var(--color-white);
+	color: var(--color-primary);
+	font: inherit;
+	font-weight: bold;
+	cursor: pointer;
+	transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.event-filter button:hover,
+.event-filter button:focus,
+.accordion-button:hover,
+.accordion-button:focus {
+	background-color: var(--color-primary);
+	color: var(--color-white);
+}
+
+.event-filter .active-filter {
+	background-color: var(--color-primary);
+	color: var(--color-white);
+}
+
+.accordion-button {
+	width: 100%;
+	text-align: left;
+	border: none;
+	border-bottom: 1px solid var(--color-border);
+	border-radius: 0;
+	background-color: transparent;
+	color: var(--color-text);
+	font-family: var(--font-main);
+	font-size: inherit;
+}
+
+.accordion-button::after {
+	content: " −";
+	float: right;
+}
+
+.accordion-button[aria-expanded="false"]::after {
+	content: " +";
+}
+
+.accordion-panel {
+	padding-top: 1rem;
+}
+
+
+@media screen and (max-width: 500px) {
+	.event-filter {
+		flex-direction: column;
+	}
+
+	.event-filter button {
+		width: 100%;
+	}
+}
+
+
+
+/* Scroll reveal animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* language switching */
+
+.language-switcher {
+  display: flex;
+  gap: 0.4rem;
+  margin-left: 1rem;
+}
+
+.language-button {
+  padding: 0.35rem 0.6rem;
+  border: 1px solid var(--color-primary);
+  background-color: white;
+  color: var(--color-primary);
+  font: inherit;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.language-button:hover,
+.language-button:focus,
+.active-language {
+  background-color: var(--color-primary);
+  color: white;
+}
